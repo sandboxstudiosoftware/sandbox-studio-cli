@@ -5,14 +5,49 @@ on:
     branches: [main]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    outputs:
+      coverage: ${{ steps.coverage.outputs.percent }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
           go-version: "1.26"
       - run: go vet ./...
-      - run: go test ./... -race
+      - run: go test ./... -race -coverprofile=coverage.out
       - run: go build ./...
+      - name: Coverage summary
+        id: coverage
+        run: |
+          pct=$(go tool cover -func=coverage.out | awk '/^total:/ {sub("%", "", $3); print $3}')
+          echo "percent=$pct" >> "$GITHUB_OUTPUT"
+          echo "Total coverage: ${pct}%" >> "$GITHUB_STEP_SUMMARY"
+
+  # Publishes the coverage figure as a shields.io endpoint JSON on the
+  # `badges` branch. Runs only for pushes to main on the public repo.
+  coverage-badge:
+    needs: test
+    if: github.event_name == 'push' && github.repository == 'sandboxstudiosoftware/sandbox-studio-cli'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Push coverage.json to the badges branch
+        env:
+          PCT: ${{ needs.test.outputs.coverage }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          colour=$(awk -v p="$PCT" 'BEGIN { print (p >= 80 ? "brightgreen" : p >= 70 ? "green" : p >= 60 ? "yellow" : "red") }')
+          mkdir badges && cd badges
+          git init -q -b badges
+          printf '{"schemaVersion":1,"label":"coverage","message":"%s%%","color":"%s"}\n' "$PCT" "$colour" > coverage.json
+          git add coverage.json
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -q -m "Coverage ${PCT}%"
+          git push -q -f "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" badges
