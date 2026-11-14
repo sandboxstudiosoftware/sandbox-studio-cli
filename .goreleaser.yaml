@@ -1,0 +1,56 @@
+# GoReleaser configuration for sbs.
+# Builds static binaries for macOS/Linux/Windows and publishes a Homebrew tap and
+# Scoop manifest. Run `goreleaser release --snapshot --clean` locally to dry-run.
+version: 2
+
+project_name: sbs
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: sbs
+    main: ./cmd/sbs
+    binary: sbs
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w -X main.version={{.Version}}
+    goos: [darwin, linux, windows]
+    goarch: [amd64, arm64]
+
+archives:
+  - formats: [tar.gz]
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+
+checksum:
+  name_template: "checksums.txt"
+
+# Homebrew tap. Requires a repo named `homebrew-tap` under the sandboxstudio org
+# and a GITHUB_TOKEN with write access, provided by CI at release time.
+brews:
+  - name: sbs
+    repository:
+      owner: sandboxstudio
+      name: homebrew-tap
+    homepage: "https://sandboxstudiosoftware.com"
+    description: "Sandbox Studio command-line client"
+    license: "MIT"
+    test: |
+      system "#{bin}/sbs version"
+
+# Scoop manifest for Windows. Requires a `scoop-bucket` repo under the org.
+scoops:
+  - repository:
+      owner: sandboxstudio
+      name: scoop-bucket
+    homepage: "https://sandboxstudiosoftware.com"
+    description: "Sandbox Studio command-line client"
+    license: "MIT"
+
+release:
+  draft: true
