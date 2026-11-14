@@ -10,8 +10,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/sandboxstudio/sbs-cli/internal/config"
-	"github.com/sandboxstudio/sbs-cli/internal/keyring"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/config"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/keyring"
 )
 
 // fakeBackend spins up a Sandbox Studio-like server and points the CLI at it via

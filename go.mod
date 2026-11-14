@@ -1,4 +1,4 @@
-module github.com/sandboxstudio/sbs-cli
+module github.com/sandboxstudiosoftware/sandbox-studio-cli
 
 go 1.26.0
 

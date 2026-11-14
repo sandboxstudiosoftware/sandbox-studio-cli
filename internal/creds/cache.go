@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/sandboxstudio/sbs-cli/internal/api"
-	"github.com/sandboxstudio/sbs-cli/internal/keyring"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/api"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/keyring"
 )
 
 // RefreshWindow is how long before expiration cached credentials stop being

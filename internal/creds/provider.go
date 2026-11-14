@@ -29,7 +29,7 @@ import (
 	"io"
 	"time"
 
-	"github.com/sandboxstudio/sbs-cli/internal/api"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/api"
 )
 
 // ProcessCredentials is the exact shape AWS expects from a credential_process.

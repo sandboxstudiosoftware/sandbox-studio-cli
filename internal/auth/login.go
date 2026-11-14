@@ -46,7 +46,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/sandboxstudio/sbs-cli/internal/api"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/api"
 )
 
 // callbackPath is the loopback redirect path the login page sends the browser to.

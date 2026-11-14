@@ -4,9 +4,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/sandboxstudio/sbs-cli/internal/auth"
-	"github.com/sandboxstudio/sbs-cli/internal/config"
-	"github.com/sandboxstudio/sbs-cli/internal/keyring"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/auth"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/config"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/keyring"
 )
 
 // TestCmdConfigureStoresUrlAndSecrets drives `configure` non-interactively by

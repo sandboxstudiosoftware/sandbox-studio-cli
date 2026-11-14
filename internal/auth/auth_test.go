@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/sandboxstudio/sbs-cli/internal/config"
-	"github.com/sandboxstudio/sbs-cli/internal/keyring"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/config"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/keyring"
 )
 
 // makeJWT builds an unsigned-but-well-formed JWT whose exp claim is now+ttl.

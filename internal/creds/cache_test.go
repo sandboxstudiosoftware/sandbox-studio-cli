@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/sandboxstudio/sbs-cli/internal/api"
-	"github.com/sandboxstudio/sbs-cli/internal/keyring"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/api"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/keyring"
 )
 
 // fakeAccess counts calls and returns credentials expiring at exp.

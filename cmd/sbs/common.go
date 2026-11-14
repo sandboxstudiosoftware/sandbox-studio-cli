@@ -9,11 +9,11 @@ import (
 
 	"golang.org/x/term"
 
-	"github.com/sandboxstudio/sbs-cli/internal/api"
-	"github.com/sandboxstudio/sbs-cli/internal/auth"
-	"github.com/sandboxstudio/sbs-cli/internal/config"
-	"github.com/sandboxstudio/sbs-cli/internal/creds"
-	"github.com/sandboxstudio/sbs-cli/internal/keyring"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/api"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/auth"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/config"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/creds"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/keyring"
 )
 
 // newKeyring constructs the keyring used by commands. It is a package var so tests

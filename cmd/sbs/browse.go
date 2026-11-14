@@ -9,8 +9,8 @@ import (
 	"github.com/spf13/cobra"
 	"golang.org/x/term"
 
-	"github.com/sandboxstudio/sbs-cli/internal/api"
-	"github.com/sandboxstudio/sbs-cli/internal/tui"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/api"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/tui"
 )
 
 func newLeaseBrowseCmd() *cobra.Command {

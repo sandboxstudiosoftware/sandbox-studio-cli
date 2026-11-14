@@ -14,10 +14,10 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/sandboxstudio/sbs-cli/internal/auth"
-	"github.com/sandboxstudio/sbs-cli/internal/config"
-	"github.com/sandboxstudio/sbs-cli/internal/creds"
-	"github.com/sandboxstudio/sbs-cli/internal/output"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/auth"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/config"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/creds"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/output"
 )
 
 // exitCodeError carries the exit status of a child process (subshell or command)

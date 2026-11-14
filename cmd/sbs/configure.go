@@ -10,8 +10,8 @@ import (
 	"github.com/spf13/cobra"
 	"golang.org/x/term"
 
-	"github.com/sandboxstudio/sbs-cli/internal/auth"
-	"github.com/sandboxstudio/sbs-cli/internal/config"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/auth"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/config"
 )
 
 // secretReader reads the client secret. It is a package var so tests can inject a

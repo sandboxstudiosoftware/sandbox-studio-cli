@@ -1,6 +1,8 @@
 # GoReleaser configuration for sbs.
-# Builds static binaries for macOS/Linux/Windows and publishes a Homebrew tap and
-# Scoop manifest. Run `goreleaser release --snapshot --clean` locally to dry-run.
+# Builds static binaries for macOS/Linux/Windows, publishes a GitHub release, a
+# Homebrew cask and a Scoop manifest. Releases run in CI when a v* tag is pushed
+# to the public repo (see sync-public.sh --tag).
+# Dry-run locally: goreleaser release --snapshot --clean
 version: 2
 
 project_name: sbs
@@ -22,6 +24,7 @@ builds:
 
 archives:
   - formats: [tar.gz]
+    files: [LICENSE, README.md]
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     format_overrides:
       - goos: windows
@@ -30,27 +33,39 @@ archives:
 checksum:
   name_template: "checksums.txt"
 
-# Homebrew tap. Requires a repo named `homebrew-tap` under the sandboxstudio org
-# and a GITHUB_TOKEN with write access, provided by CI at release time.
-brews:
+# Homebrew tap: github.com/sandboxstudiosoftware/homebrew-tap (Casks/sbs.rb).
+# CI provides a token with write access to it (secret TAP_GITHUB_TOKEN).
+homebrew_casks:
   - name: sbs
     repository:
-      owner: sandboxstudio
+      owner: sandboxstudiosoftware
       name: homebrew-tap
+    commit_author:
+      name: Sandbox Studio Dev
+      email: dev@sandboxstudiosoftware.com
     homepage: "https://sandboxstudiosoftware.com"
     description: "Sandbox Studio command-line client"
-    license: "MIT"
-    test: |
-      system "#{bin}/sbs version"
+    binaries: [sbs]
+    # The binary isn't signed/notarised by Apple, so clear the quarantine flag
+    # that would otherwise make Gatekeeper block it on first run.
+    hooks:
+      post:
+        install_steps: |
+          on_macos do
+            run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{ .StagedPath }}/sbs"]
+          end
 
-# Scoop manifest for Windows. Requires a `scoop-bucket` repo under the org.
+# Scoop manifest for Windows: github.com/sandboxstudiosoftware/scoop-bucket.
 scoops:
   - repository:
-      owner: sandboxstudio
+      owner: sandboxstudiosoftware
       name: scoop-bucket
+    commit_author:
+      name: Sandbox Studio Dev
+      email: dev@sandboxstudiosoftware.com
     homepage: "https://sandboxstudiosoftware.com"
     description: "Sandbox Studio command-line client"
-    license: "MIT"
+    license: "Apache-2.0"
 
 release:
-  draft: true
+  draft: false

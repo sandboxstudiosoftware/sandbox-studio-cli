@@ -7,8 +7,8 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/sandboxstudio/sbs-cli/internal/api"
-	"github.com/sandboxstudio/sbs-cli/internal/output"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/api"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/output"
 )
 
 // Backend is the slice of the API client the UI needs. *api.Client satisfies it;

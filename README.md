@@ -29,6 +29,8 @@
 - [Sessions and credentials](#sessions-and-credentials)
 - [How `sbs login` works](#how-sbs-login-works)
 - [Development](#development)
+- [Contributing](#contributing)
+- [Licence](#licence)
 
 ## Install
 
@@ -42,16 +44,31 @@
 
 ### Packages
 
-Package managers (planned, not yet published):
+Homebrew (macOS and Linux):
 
 ```sh
-brew install sandboxstudio/tap/sbs      # macOS / Linux
-scoop install sbs                        # Windows
+brew install sandboxstudiosoftware/tap/sbs
 ```
 
-### From source
+Scoop (Windows):
+
+```powershell
+scoop bucket add sandboxstudio https://github.com/sandboxstudiosoftware/scoop-bucket
+scoop install sbs
+```
+
+Or download a binary for your platform from the
+[releases page](https://github.com/sandboxstudiosoftware/sandbox-studio-cli/releases).
+
+### With Go
 
 Requires Go 1.26 or later:
+
+```sh
+go install github.com/sandboxstudiosoftware/sandbox-studio-cli/cmd/sbs@latest
+```
+
+Or build from a clone:
 
 ```sh
 go build -o sbs ./cmd/sbs
@@ -433,3 +450,11 @@ go test -cover ./...                       # with coverage per package
 go build ./...
 goreleaser release --snapshot --clean      # dry-run cross-platform build
 ```
+
+## Contributing
+
+Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Licence
+
+Licensed under the [Apache License 2.0](LICENSE).

@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/sandboxstudio/sbs-cli/internal/api"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/api"
 )
 
 // TestWriteContract asserts the exact JSON schema AWS requires from a

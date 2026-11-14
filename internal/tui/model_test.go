@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/sandboxstudio/sbs-cli/internal/api"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/api"
 )
 
 type fakeBackend struct {

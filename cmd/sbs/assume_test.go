@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/sandboxstudio/sbs-cli/internal/creds"
+	"github.com/sandboxstudiosoftware/sandbox-studio-cli/internal/creds"
 )
 
 func TestCmdAssumeExportPosix(t *testing.T) {
